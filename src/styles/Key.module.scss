@@ -1,0 +1,11 @@
+.key {
+  --key-height: 50px;
+  position: relative;
+  width: calc(var(--key-height) * var(--width));
+  height: var(--key-height);
+
+  input {
+    height: 100%;
+    width: 100%;
+  }
+}
