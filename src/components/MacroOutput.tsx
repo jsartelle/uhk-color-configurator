@@ -45,6 +45,15 @@ ${customColors
   )
   .join('\n')}
 `
-
-  return <code className={styles.macro}>{macro}</code>
+  return (
+    <div className={styles.container}>
+      <textarea readOnly className={styles.textarea} value={macro} />
+      <button
+        className={styles.copy}
+        onClick={() => navigator.clipboard.writeText(macro)}
+      >
+        Copy
+      </button>
+    </div>
+  )
 }

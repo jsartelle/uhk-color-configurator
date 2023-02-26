@@ -1,6 +1,24 @@
-.macro {
-	white-space: pre-wrap;
-	border: 1px solid black;
-	border-radius: 10px;
-	padding: 10px;
+.container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid black;
+  border-radius: 10px;
+  white-space: pre-wrap;
+  resize: vertical;
+  position: relative;
+}
+
+.textarea {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+
+.copy {
+  position: absolute;
+  right: 0;
+  top: 0;
 }
