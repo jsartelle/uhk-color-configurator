@@ -4,12 +4,14 @@ import keyMap from '../keyMap.json'
 import type { KeyColor, KeyColorChangeHandler } from '../App'
 
 interface Props {
+  activeLayer: number
   defaultColor: string
   customColors: KeyColor[]
   setKeyColor: KeyColorChangeHandler
 }
 
 export default function KeyboardView({
+  activeLayer,
   defaultColor,
   customColors,
   setKeyColor,
@@ -24,10 +26,19 @@ export default function KeyboardView({
                 {row.map((key) => (
                   <Key
                     key={key.index}
-                    {...key}
+                    width={key.width}
+                    layer={activeLayer}
                     slot={device.slot}
+                    index={key.index}
                     defaultColor={defaultColor}
-                    keyColor={customColors.find(k => k.slot === device.slot && k.index === key.index)}
+                    color={
+                      customColors.find(
+                        (c) =>
+                          c.layer === activeLayer &&
+                          c.slot === device.slot &&
+                          c.index === key.index
+                      )?.color
+                    }
                     setKeyColor={setKeyColor}
                   />
                 ))}

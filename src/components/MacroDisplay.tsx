@@ -91,11 +91,13 @@ export default function MacroDisplay({
       const index = parseInt(match[3])
       const colorIndex = parseInt(match[4])
 
-      _customColors.push({ slot, index, color: _uniqueColors[colorIndex] })
+      _customColors.push({
+        layer,
+        slot,
+        index,
+        color: _uniqueColors[colorIndex],
+      })
     }
-
-    console.log(_uniqueColors)
-    console.log(_customColors)
 
     setCustomColors(_customColors)
     setEditMacro('')
@@ -111,8 +113,8 @@ ${uniqueColors
 
 ${customColors
   .map(
-    ({ slot, index, color }) =>
-      `set backlight.perKey.change 0 ${slot} ${index} ${uniqueColors.indexOf(
+    ({ layer, slot, index, color }) =>
+      `set backlight.perKey.change ${layer} ${slot} ${index} ${uniqueColors.indexOf(
         hexToRgb(color)
       )}`
   )

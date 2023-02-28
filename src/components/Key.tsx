@@ -3,26 +3,28 @@ import type { KeyColor, KeyColorChangeHandler } from '../App'
 
 interface Props {
   width: number
+  layer: number
   slot: number
   index: number
   defaultColor: string
-  keyColor?: KeyColor,
+  color?: string
   setKeyColor: KeyColorChangeHandler
 }
 
 export default function Key({
   width,
+  layer,
   slot,
   index,
   defaultColor,
-  keyColor,
+  color,
   setKeyColor,
 }: Props) {
-  // TODO option to show default key labels
+  // TODO option to show default key labels, and save them as comments in the output
   const additionalStyles = { '--width': width } as React.CSSProperties
 
   const changeColor = (newColor: string | null) => {
-    setKeyColor({ slot, index, color: newColor })
+    setKeyColor({ layer, slot, index, color: newColor })
   }
 
   const resetColor = (e: React.MouseEvent) => {
@@ -35,9 +37,8 @@ export default function Key({
       <input
         type="color"
         data-key-index={index}
-        data-color={keyColor?.color}
-        value={keyColor?.color ?? defaultColor}
-        onChange={e => changeColor(e.target.value)}
+        value={color ?? defaultColor}
+        onChange={(e) => changeColor(e.target.value)}
         onContextMenu={resetColor}
       />
     </div>

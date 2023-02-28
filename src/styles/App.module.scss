@@ -1,12 +1,20 @@
 .app {
-	padding: 20px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 20px;
+  gap: 20px;
+}
+
+.layerSelect {
 	display: flex;
-	flex-flow: column nowrap;
+	flex-flow: row nowrap;
 	align-items: flex-start;
 	justify-content: flex-start;
-	gap: 20px;
+	gap: 10px;
+}
 
-	label input {
-		margin-left: 10px;
-	}
+.defaultColorInput {
+  margin-left: 10px;
 }
