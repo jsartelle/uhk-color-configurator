@@ -170,19 +170,19 @@
       [
         {
           "index": 0,
-          "label": "•",
+          "label": "• 1",
           "width": 1
         }
       ],
       [
         {
           "index": 1,
-          "label": "•",
+          "label": "• 2",
           "width": 1
         },
         {
           "index": 2,
-          "label": "•",
+          "label": "• 3",
           "width": 1
         }
       ]

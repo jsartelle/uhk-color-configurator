@@ -121,10 +121,14 @@ ${customColors
       .toString()
       .padStart(uniqueColors.length.toString().length, '0')
 
-    const label = Object.values(keyMap)
+    let label = Object.values(keyMap)
       .find((device) => device.slot === slot)!
       .keys.flat()
       .find((key) => key.index === index)!.label
+
+    if (['Shift', 'Ctrl', 'Super', 'Alt', 'Fn'].includes(label)) {
+      label = `${slot ? 'Left' : 'Right'} ${label}`
+    }
 
     const line = `set backlight.perKey.change ${layer} ${slot} ${paddedIndex} ${paddedColor} # ${label}`
 
