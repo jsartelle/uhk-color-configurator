@@ -6,6 +6,7 @@ import type { KeyColor, KeyColorChangeHandler } from '../App'
 interface Props {
   activeLayer: number
   defaultColor: string
+  splitLayout: boolean,
   showKeyLabels: boolean,
   customColors: KeyColor[]
   setKeyColor: KeyColorChangeHandler
@@ -14,12 +15,16 @@ interface Props {
 export default function KeyboardView({
   activeLayer,
   defaultColor,
+  splitLayout,
   showKeyLabels,
   customColors,
   setKeyColor,
 }: Props) {
+  let className = styles.container
+  if (splitLayout) className += ` ${styles.split}`
+
   return (
-    <section className={styles.container}>
+    <section className={className}>
       {Object.entries(keyMap).map(([deviceName, device], index) => {
         return (
           <div className={styles[deviceName]} key={index}>

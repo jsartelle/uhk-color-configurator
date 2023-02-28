@@ -1,5 +1,5 @@
 .container {
-  --key-gap: 5px;
+  --key-height: 50px;
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-end;
@@ -12,7 +12,6 @@
   flex-flow: column nowrap;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: var(--key-gap);
 }
 
 .left {
@@ -24,6 +23,10 @@
   align-items: center;
   margin-right: 100px;
 
+  .container:not(.split) & {
+    display: none;
+  }
+
   [data-key-index='2'] {
     transform: translate(15px, 15px) rotate(30deg);
   }
@@ -32,6 +35,10 @@
 .right {
   composes: device;
   align-items: flex-end;
+
+  .container:not(.split) & {
+    margin-left: calc(var(--key-height) / -1.333);
+  }
 }
 
 .row {
@@ -39,5 +46,4 @@
   flex-flow: row nowrap;
   align-items: stretch;
   justify-content: flex-start;
-  gap: var(--key-gap);
 }

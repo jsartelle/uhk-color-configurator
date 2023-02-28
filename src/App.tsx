@@ -25,7 +25,9 @@ const layers = ['Base', 'Mod', 'Fn']
 function App() {
   const [activeLayer, setActiveLayer] = useState(0)
   const [defaultColor, setDefaultColor] = useState('#ffffff')
+  const [splitLayout, setSplitLayout] = useState(true)
   const [showKeyLabels, setShowKeyLabels] = useState(true)
+  // TODO save/load from localStorage, add reset button
   const [customColors, setCustomColors] = useState<KeyColor[]>([])
 
   const handleKeyColorChange: KeyColorChangeHandler = (keyColor) => {
@@ -62,6 +64,7 @@ function App() {
       <KeyboardView
         activeLayer={activeLayer}
         defaultColor={defaultColor}
+        splitLayout={splitLayout}
         showKeyLabels={showKeyLabels}
         customColors={customColors}
         setKeyColor={handleKeyColorChange}
@@ -77,6 +80,15 @@ function App() {
             onChange={(e) => setDefaultColor(e.target.value)}
           />
           <span>Default Color</span>
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={splitLayout}
+            onChange={(e) => setSplitLayout(!splitLayout)}
+          />
+          <span>Split Layout</span>
         </label>
 
         <label>
