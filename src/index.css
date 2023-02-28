@@ -1,12 +1,18 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 body {
+  box-sizing: border-box;
   margin: 0;
-  background-color: #222222;
-  color: white;
   font-family: system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #222222;
+    color: white;
+  }
 }
