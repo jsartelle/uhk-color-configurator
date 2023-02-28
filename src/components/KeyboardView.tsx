@@ -6,6 +6,7 @@ import type { KeyColor, KeyColorChangeHandler } from '../App'
 interface Props {
   activeLayer: number
   defaultColor: string
+  showKeyLabels: boolean,
   customColors: KeyColor[]
   setKeyColor: KeyColorChangeHandler
 }
@@ -13,6 +14,7 @@ interface Props {
 export default function KeyboardView({
   activeLayer,
   defaultColor,
+  showKeyLabels,
   customColors,
   setKeyColor,
 }: Props) {
@@ -30,6 +32,8 @@ export default function KeyboardView({
                     layer={activeLayer}
                     slot={device.slot}
                     index={key.index}
+                    label={key.label}
+                    showKeyLabels={showKeyLabels}
                     defaultColor={defaultColor}
                     color={
                       customColors.find(

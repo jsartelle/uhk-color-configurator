@@ -1,13 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { KeyColor } from '../App'
+import keyMap from '../keyMap.json'
 import styles from '../styles/MacroDisplay.module.scss'
-
-interface Props {
-  defaultColor: string
-  setDefaultColor: (defaultColor: string) => void
-  customColors: KeyColor[]
-  setCustomColors: (customColors: KeyColor[]) => void
-}
 
 /**
  * @param hex Hex color string with leading #
@@ -24,6 +18,13 @@ export function hexToRgb(hex: string) {
  */
 export function rgbToHex(r: number, g: number, b: number) {
   return '#' + [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('')
+}
+
+interface Props {
+  defaultColor: string
+  setDefaultColor: (defaultColor: string) => void
+  customColors: KeyColor[]
+  setCustomColors: (customColors: KeyColor[]) => void
 }
 
 export default function MacroDisplay({
@@ -99,6 +100,7 @@ export default function MacroDisplay({
       })
     }
 
+    // TODO sort
     setCustomColors(_customColors)
     setEditMacro('')
   }
@@ -112,12 +114,22 @@ ${uniqueColors
   .join('\n')}
 
 ${customColors
-  .map(
-    ({ layer, slot, index, color }) =>
-      `set backlight.perKey.change ${layer} ${slot} ${index} ${uniqueColors.indexOf(
-        hexToRgb(color)
-      )}`
-  )
+  .map(({ layer, slot, index, color }) => {
+    const paddedIndex = index.toString().padStart(2, '0')
+    const paddedColor = uniqueColors
+      .indexOf(hexToRgb(color))
+      .toString()
+      .padStart(uniqueColors.length.toString().length, '0')
+
+    const label = Object.values(keyMap)
+      .find((device) => device.slot === slot)!
+      .keys.flat()
+      .find((key) => key.index === index)!.label
+
+    const line = `set backlight.perKey.change ${layer} ${slot} ${paddedIndex} ${paddedColor} # ${label}`
+
+    return line
+  })
   .join('\n')}
 `
   return (

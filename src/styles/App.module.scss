@@ -15,6 +15,14 @@
 	gap: 10px;
 }
 
-.defaultColorInput {
-  margin-left: 10px;
+.options {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 10px;
+
+  span {
+    margin-left: 10px;
+  }
 }

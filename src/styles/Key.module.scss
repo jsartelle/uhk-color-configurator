@@ -3,9 +3,18 @@
   position: relative;
   width: calc(var(--key-height) * var(--width));
   height: var(--key-height);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
 
   input {
     height: 100%;
     width: 100%;
   }
+}
+
+.label {
+  position: absolute;
+  text-shadow: 0 0 5px black, 0 0 5px black;
 }

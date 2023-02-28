@@ -25,6 +25,7 @@ const layers = ['Base', 'Mod', 'Fn']
 function App() {
   const [activeLayer, setActiveLayer] = useState(0)
   const [defaultColor, setDefaultColor] = useState('#ffffff')
+  const [showKeyLabels, setShowKeyLabels] = useState(true)
   const [customColors, setCustomColors] = useState<KeyColor[]>([])
 
   const handleKeyColorChange: KeyColorChangeHandler = (keyColor) => {
@@ -61,21 +62,30 @@ function App() {
       <KeyboardView
         activeLayer={activeLayer}
         defaultColor={defaultColor}
+        showKeyLabels={showKeyLabels}
         customColors={customColors}
         setKeyColor={handleKeyColorChange}
       />
 
-      <fieldset>
+      <fieldset className={styles.options}>
         <legend>Options</legend>
 
         <label>
-          Default Color
           <input
             type="color"
-            className={styles.defaultColorInput}
             value={defaultColor}
             onChange={(e) => setDefaultColor(e.target.value)}
           />
+          <span>Default Color</span>
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={showKeyLabels}
+            onChange={(e) => setShowKeyLabels(!showKeyLabels)}
+          />
+          <span>Show Key Labels</span>
         </label>
       </fieldset>
 

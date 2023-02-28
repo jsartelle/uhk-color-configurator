@@ -5,130 +5,160 @@
       [
         {
           "index": 0,
+          "label": "` ~",
           "width": 1
         },
         {
           "index": 1,
+          "label": "1 !",
           "width": 1
         },
         {
           "index": 2,
+          "label": "2 @",
           "width": 1
         },
         {
           "index": 3,
+          "label": "3 #",
           "width": 1
         },
         {
           "index": 4,
+          "label": "4 $",
           "width": 1
         },
         {
           "index": 5,
+          "label": "5 %",
           "width": 1
         },
         {
           "index": 6,
+          "label": "6 ^",
           "width": 1
         }
       ],
       [
         {
           "index": 7,
+          "label": "Tab",
           "width": 1.5
         },
         {
           "index": 8,
+          "label": "Q",
           "width": 1
         },
         {
           "index": 9,
+          "label": "W",
           "width": 1
         },
         {
           "index": 10,
+          "label": "E",
           "width": 1
         },
         {
           "index": 11,
+          "label": "R",
           "width": 1
         },
         {
           "index": 13,
+          "label": "T",
           "width": 1
         }
       ],
       [
         {
           "index": 14,
+          "label": "Mouse",
           "width": 1.75
         },
         {
           "index": 15,
+          "label": "A",
           "width": 1
         },
         {
           "index": 16,
+          "label": "S",
           "width": 1
         },
         {
           "index": 17,
+          "label": "D",
           "width": 1
         },
         {
           "index": 18,
+          "label": "F",
           "width": 1
         },
         {
           "index": 20,
+          "label": "G",
           "width": 1
         }
       ],
       [
         {
           "index": 21,
+          "label": "Shift",
           "width": 2.25
         },
         {
           "index": 23,
+          "label": "Z",
           "width": 1
         },
         {
           "index": 24,
+          "label": "X",
           "width": 1
         },
         {
           "index": 25,
+          "label": "C",
           "width": 1
         },
         {
           "index": 26,
+          "label": "V",
           "width": 1
         },
         {
           "index": 27,
+          "label": "B",
           "width": 1
         }
       ],
       [
         {
           "index": 28,
+          "label": "Ctrl",
           "width": 1.25
         },
         {
           "index": 29,
+          "label": "Super",
           "width": 1.25
         },
         {
           "index": 30,
+          "label": "Alt",
           "width": 1.25
         },
         {
           "index": 31,
+          "label": "Fn",
           "width": 1.25
         },
         {
           "index": 33,
+          "label": "Mod",
           "width": 1.75
         }
       ]
@@ -140,16 +170,19 @@
       [
         {
           "index": 0,
+          "label": "•",
           "width": 1
         }
       ],
       [
         {
           "index": 1,
+          "label": "•",
           "width": 1
         },
         {
           "index": 2,
+          "label": "•",
           "width": 1
         }
       ]
@@ -161,142 +194,175 @@
       [
         {
           "index": 0,
+          "label": "7 &",
           "width": 1
         },
         {
           "index": 1,
+          "label": "8 *",
           "width": 1
         },
         {
           "index": 2,
+          "label": "9 (",
           "width": 1
         },
         {
           "index": 3,
+          "label": "0 )",
           "width": 1
         },
         {
           "index": 4,
+          "label": "- _",
           "width": 1
         },
         {
           "index": 5,
+          "label": "= +",
           "width": 1
         },
         {
           "index": 6,
+          "label": "←",
           "width": 1.5
         }
       ],
       [
         {
           "index": 14,
+          "label": "Y",
           "width": 1
         },
         {
           "index": 7,
+          "label": "U",
           "width": 1
         },
         {
           "index": 8,
+          "label": "I",
           "width": 1
         },
         {
           "index": 9,
+          "label": "O",
           "width": 1
         },
         {
           "index": 10,
+          "label": "P",
           "width": 1
         },
         {
           "index": 11,
+          "label": "[ {",
           "width": 1
         },
         {
           "index": 12,
+          "label": "] }",
           "width": 1
         },
         {
           "index": 13,
+          "label": "\\ |",
           "width": 1
         }
       ],
       [
         {
           "index": 21,
+          "label": "H",
           "width": 1
         },
         {
           "index": 15,
+          "label": "J",
           "width": 1
         },
         {
           "index": 16,
+          "label": "K",
           "width": 1
         },
         {
           "index": 17,
+          "label": "L",
           "width": 1
         },
         {
           "index": 18,
+          "label": "; :",
           "width": 1
         },
         {
           "index": 19,
+          "label": "' \"",
           "width": 1
         },
         {
           "index": 20,
+          "label": "Enter",
           "width": 1.75
         }
       ],
       [
         {
           "index": 22,
+          "label": "N",
           "width": 1
         },
         {
           "index": 23,
+          "label": "M",
           "width": 1
         },
         {
           "index": 24,
+          "label": ", <",
           "width": 1
         },
         {
           "index": 25,
+          "label": ". >",
           "width": 1
         },
         {
           "index": 26,
+          "label": "/ ?",
           "width": 1
         },
         {
           "index": 27,
+          "label": "Shift",
           "width": 2.25
         }
       ],
       [
         {
           "index": 29,
+          "label": "Space",
           "width": 1.75
         },
         {
           "index": 31,
+          "label": "Fn",
           "width": 1.25
         },
         {
           "index": 32,
+          "label": "Alt",
           "width": 1.25
         },
         {
           "index": 33,
+          "label": "Super",
           "width": 1.25
         },
         {
           "index": 34,
+          "label": "Ctrl",
           "width": 2.25
         }
       ]
