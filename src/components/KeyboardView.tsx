@@ -1,19 +1,21 @@
 import styles from '../styles/KeyboardView.module.scss'
 import Key from './Key'
 import keyMap from '../keyMap.json'
-import type { KeyColorChangeHandler } from '../App'
+import type { KeyColor, KeyColorChangeHandler } from '../App'
 
 interface Props {
   defaultColor: string
-  onKeyColorChange: KeyColorChangeHandler
+  customColors: KeyColor[]
+  setKeyColor: KeyColorChangeHandler
 }
 
 export default function KeyboardView({
   defaultColor,
-  onKeyColorChange,
+  customColors,
+  setKeyColor,
 }: Props) {
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       {Object.entries(keyMap).map(([deviceName, device], index) => {
         return (
           <div className={styles[deviceName]} key={index}>
@@ -25,7 +27,8 @@ export default function KeyboardView({
                     {...key}
                     slot={device.slot}
                     defaultColor={defaultColor}
-                    onKeyColorChange={onKeyColorChange}
+                    keyColor={customColors.find(k => k.slot === device.slot && k.index === key.index)}
+                    setKeyColor={setKeyColor}
                   />
                 ))}
               </div>
@@ -33,6 +36,6 @@ export default function KeyboardView({
           </div>
         )
       })}
-    </div>
+    </section>
   )
 }

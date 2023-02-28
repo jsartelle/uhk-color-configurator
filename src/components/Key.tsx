@@ -1,13 +1,13 @@
-import { useState } from 'react'
 import styles from '../styles/Key.module.scss'
-import type { KeyColorChangeHandler } from '../App'
+import type { KeyColor, KeyColorChangeHandler } from '../App'
 
 interface Props {
   width: number
   slot: number
   index: number
   defaultColor: string
-  onKeyColorChange: KeyColorChangeHandler
+  keyColor?: KeyColor,
+  setKeyColor: KeyColorChangeHandler
 }
 
 export default function Key({
@@ -15,15 +15,14 @@ export default function Key({
   slot,
   index,
   defaultColor,
-  onKeyColorChange,
+  keyColor,
+  setKeyColor,
 }: Props) {
   // TODO option to show default key labels
-  const [color, setColor] = useState<string | null>(null)
   const additionalStyles = { '--width': width } as React.CSSProperties
 
   const changeColor = (newColor: string | null) => {
-    setColor(newColor)
-    onKeyColorChange({ slot, index, color: newColor })
+    setKeyColor({ slot, index, color: newColor })
   }
 
   const resetColor = (e: React.MouseEvent) => {
@@ -36,7 +35,8 @@ export default function Key({
       <input
         type="color"
         data-key-index={index}
-        value={color ?? defaultColor}
+        data-color={keyColor?.color}
+        value={keyColor?.color ?? defaultColor}
         onChange={e => changeColor(e.target.value)}
         onContextMenu={resetColor}
       />

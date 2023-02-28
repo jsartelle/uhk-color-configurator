@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './styles/App.module.scss'
 import KeyboardView from './components/KeyboardView'
-import MacroOutput from './components/MacroOutput'
+import MacroDisplay from './components/MacroDisplay'
 
 export interface KeyColor {
   slot: number
@@ -19,7 +19,6 @@ export type KeyColorChangeHandler = (customColor: KeyColorChange) => void
 
 function App() {
   // TODO support layers
-  // TODO support loading colors by parsing macros
   const [defaultColor, setDefaultColor] = useState('#ffffff')
   const [customColors, setCustomColors] = useState<KeyColor[]>([])
 
@@ -34,10 +33,11 @@ function App() {
   }
 
   return (
-    <div className={styles.app}>
+    <main className={styles.app}>
       <KeyboardView
         defaultColor={defaultColor}
-        onKeyColorChange={handleKeyColorChange}
+        customColors={customColors}
+        setKeyColor={handleKeyColorChange}
       />
 
       <label>
@@ -49,8 +49,13 @@ function App() {
         />
       </label>
 
-      <MacroOutput defaultColor={defaultColor} customColors={customColors} />
-    </div>
+      <MacroDisplay
+        defaultColor={defaultColor}
+        setDefaultColor={setDefaultColor}
+        customColors={customColors}
+        setCustomColors={setCustomColors}
+      />
+    </main>
   )
 }
 
