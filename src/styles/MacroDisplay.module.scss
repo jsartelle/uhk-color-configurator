@@ -6,20 +6,20 @@
 .textarea {
   padding: 10px;
   width: 100%;
-
   height: 300px;
   border: 1px solid currentColor;
   border-radius: 10px;
   background-color: transparent;
   color: inherit;
   white-space: pre-wrap;
+  font-family: monospace;
   resize: vertical;
 }
 
 .copy {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
 }
 
 .buttons {
