@@ -102,7 +102,6 @@ export default function MacroDisplay({
 
     // TODO sort
     setCustomColors(_customColors)
-    setEditMacro('')
   }
 
   const macro = `set macroEngine.extendedCommands 1
