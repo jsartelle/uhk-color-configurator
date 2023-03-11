@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import colorNamer from 'color-namer'
 import type { KeyColor } from '../App'
 import keyMap from '../keyMap.json'
 import styles from '../styles/MacroDisplay.module.scss'
@@ -55,7 +56,7 @@ export default function MacroDisplay({
   function saveEdit() {
     setEditMode(false)
 
-    const _uniqueColors: string[] = []
+    const colorsHex: string[] = []
     const _customColors: KeyColor[] = []
 
     // Parse color values
@@ -76,7 +77,7 @@ export default function MacroDisplay({
       if (index === 0) {
         setDefaultColor(hexColor)
       }
-      _uniqueColors[index] = hexColor
+      colorsHex[index] = hexColor
     }
 
     // Parse key color mappings
@@ -96,7 +97,7 @@ export default function MacroDisplay({
         layer,
         slot,
         index,
-        color: _uniqueColors[colorIndex],
+        color: colorsHex[colorIndex],
       })
     }
 
@@ -109,7 +110,10 @@ set backlight.strategy perKey
 set backlight.perKey.default_coloring 0
 
 ${uniqueColors
-  .map((color, index) => `set backlight.perKey.color ${index} ${color}`)
+  .map((color, index) => {
+    const names = colorNamer(`rgb(${color.replaceAll(' ', ',')})`, { pick: ['pantone']})
+    return `set backlight.perKey.color ${index} ${color} # ${names.pantone[0].name}`
+  })
   .join('\n')}
 
 ${customColors
