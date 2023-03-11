@@ -50,7 +50,7 @@ function App() {
       <fieldset className={styles.layerSelect}>
         <legend>Select Layer</legend>
         {layers.map((name, index) => (
-          <label>
+          <label key={index}>
             <input
               type="radio"
               name="layer"
