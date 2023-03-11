@@ -129,6 +129,7 @@ ${customColors
       .keys.flat()
       .find((key) => key.index === index)!.label
 
+    label = label.replace('•', 'Cluster') // bullet doesn't render in Agent
     if (['Shift', 'Ctrl', 'Super', 'Alt', 'Fn'].includes(label)) {
       label = `${slot ? 'Left' : 'Right'} ${label}`
     }
