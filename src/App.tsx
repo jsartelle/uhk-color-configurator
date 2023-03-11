@@ -45,6 +45,8 @@ function App() {
 
   return (
     <main className={styles.app}>
+      <h1>UHK Color Configurator</h1>
+
       <fieldset className={styles.layerSelect}>
         <legend>Select Layer</legend>
         {layers.map((name, index) => (
@@ -61,6 +63,7 @@ function App() {
         ))}
       </fieldset>
 
+      <label>Right click a key to reset to the default color</label>
       <KeyboardView
         activeLayer={activeLayer}
         defaultColor={defaultColor}
