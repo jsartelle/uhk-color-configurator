@@ -1,34 +1,31 @@
-.container {
+.macroContainer {
   position: relative;
-  width: 500px;
-}
-
-.textarea {
-  padding: 10px;
-  width: 100%;
-  height: 300px;
-  border: 1px solid currentColor;
-  border-radius: 10px;
-  background-color: transparent;
-  color: inherit;
-  white-space: pre-wrap;
-  font-family: monospace;
+  overflow: hidden;
+  margin-bottom: var(--spacing);
+  min-height: 15rem;
+  height: 15rem;
   resize: vertical;
 }
 
-.copy {
+.macro {
+  height: 100%;
+  font-family: monospace;
+  resize: none;
+}
+
+.copyButton {
   position: absolute;
-  top: 5px;
-  right: 5px;
+  top: var(--spacing-small);
+  right: var(--spacing-small);
 }
 
 .buttons {
   display: flex;
   flex-flow: row nowrap;
-  align-items: stretch;
-  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--spacing-small);
+}
 
-  span {
-    flex-grow: 1;
-  }
+.editDescription {
+  flex-grow: 1;
 }

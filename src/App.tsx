@@ -19,11 +19,25 @@ export interface KeyColorChange {
 
 export type KeyColorChangeHandler = (customColor: KeyColorChange) => void
 
-// FIXME get all layer names
-const layers = ['Base', 'Mod', 'Fn']
+const defaultLayers = {
+  Base: true,
+  Mod: true,
+  Mouse: true,
+  Fn: true,
+  Fn2: false,
+  Fn3: false,
+  Fn4: false,
+  Fn5: false,
+  Shift: false,
+  Ctrl: false,
+  Alt: false,
+  Super: false,
+}
 
 function App() {
+  const [layers, setLayers] = useState({ ...defaultLayers })
   const [activeLayer, setActiveLayer] = useState(0)
+  const [editLayers, setEditLayers] = useState(false)
   const [defaultColor, setDefaultColor] = useState('#ffffff')
   const [splitLayout, setSplitLayout] = useState(true)
   const [showKeyLabels, setShowKeyLabels] = useState(true)
@@ -44,26 +58,12 @@ function App() {
   }
 
   return (
-    <main className={styles.app}>
-      <h1>UHK Color Configurator</h1>
+    <main className="container">
+      <hgroup>
+        <h1>UHK Color Configurator</h1>
+        <p>Right click a key to reset to the default color.</p>
+      </hgroup>
 
-      <fieldset className={styles.layerSelect}>
-        <legend>Select Layer</legend>
-        {layers.map((name, index) => (
-          <label key={index}>
-            <input
-              type="radio"
-              name="layer"
-              value={index}
-              defaultChecked={index === activeLayer}
-              onChange={(e) => setActiveLayer(parseInt(e.target.value))}
-            />
-            <span>{name}</span>
-          </label>
-        ))}
-      </fieldset>
-
-      <label>Right click a key to reset to the default color</label>
       <KeyboardView
         activeLayer={activeLayer}
         defaultColor={defaultColor}
@@ -73,36 +73,79 @@ function App() {
         setKeyColor={handleKeyColorChange}
       />
 
-      <fieldset className={styles.options}>
-        <legend>Options</legend>
+      <section>
+        <h2>Active Layer</h2>
+        <fieldset className={styles.layerList}>
+          {editLayers
+            ? Object.entries(layers).map(([name, value], index) => (
+                <label key={index} className={styles.layer}>
+                  <input
+                    type="checkbox"
+                    name="layer"
+                    disabled={index === 0}
+                    checked={value}
+                    onChange={() => setLayers({ ...layers, [name]: !value })}
+                  />
+                  <span>{name}</span>
+                </label>
+              ))
+            : Object.entries(layers)
+                .filter(([, value]) => value)
+                .map(([name], index) => (
+                  <label key={index} className={styles.layer}>
+                    <input
+                      type="radio"
+                      name="layer"
+                      value={index}
+                      checked={index === activeLayer}
+                      onChange={(e) => setActiveLayer(parseInt(e.target.value))}
+                    />
+                    <span>{name}</span>
+                  </label>
+                ))}
+        </fieldset>
 
-        <label>
-          <input
-            type="color"
-            value={defaultColor}
-            onChange={(e) => setDefaultColor(e.target.value)}
-          />
-          <span>Default Color</span>
-        </label>
+        {/* FIXME when layers are changed update macro appropriately */}
+        <button onClick={() => setEditLayers(!editLayers)}>
+          {editLayers ? 'Save' : 'Edit Layers...'}
+        </button>
+      </section>
 
-        <label>
-          <input
-            type="checkbox"
-            checked={splitLayout}
-            onChange={(e) => setSplitLayout(!splitLayout)}
-          />
-          <span>Split Layout</span>
-        </label>
 
-        <label>
-          <input
-            type="checkbox"
-            checked={showKeyLabels}
-            onChange={(e) => setShowKeyLabels(!showKeyLabels)}
-          />
-          <span>Show Key Labels</span>
-        </label>
-      </fieldset>
+      <section>
+        <h2>Settings</h2>
+        <fieldset>
+          <label>
+            <input
+              className={styles.defaultColor}
+              type="color"
+              value={defaultColor}
+              onChange={(e) => setDefaultColor(e.target.value)}
+            />
+            <span>Default Color</span>
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              role="switch"
+              checked={splitLayout}
+              onChange={(e) => setSplitLayout(!splitLayout)}
+            />
+            <span>Split Layout</span>
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              role="switch"
+              checked={showKeyLabels}
+              onChange={(e) => setShowKeyLabels(!showKeyLabels)}
+            />
+            <span>Show Key Labels</span>
+          </label>
+        </fieldset>
+      </section>
 
       <MacroDisplay
         defaultColor={defaultColor}

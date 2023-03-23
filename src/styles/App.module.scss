@@ -1,28 +1,16 @@
-.app {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 20px;
-  gap: 20px;
+.layerList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
 }
 
-.layerSelect {
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: flex-start;
-	justify-content: flex-start;
-	gap: 10px;
+.layer {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
 }
 
-.options {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 10px;
-
-  span {
-    margin-left: 10px;
-  }
+.defaultColor {
+  margin-right: var(--spacing-small);
+  width: var(--key-height) !important;
+  height: var(--key-height) !important;
 }

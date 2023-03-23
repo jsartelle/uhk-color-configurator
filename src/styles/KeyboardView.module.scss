@@ -1,10 +1,8 @@
 .container {
-  --key-height: 50px;
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-end;
-  justify-content: flex-start;
-  padding-bottom: 25px;
+  justify-content: center;
 }
 
 .device {
@@ -21,14 +19,19 @@
 .cluster {
   composes: device;
   align-items: center;
-  margin-right: 100px;
+  margin-right: auto;
+  margin-left: calc(var(--key-height) * -0.5);
 
   .container:not(.split) & {
     display: none;
   }
 
   [data-key-index='2'] {
-    transform: translate(15px, 15px) rotate(30deg);
+    transform: translate(
+        calc(var(--key-height) / 3),
+        calc(var(--key-height) / 3)
+      )
+      rotate(30deg);
   }
 }
 
@@ -37,7 +40,7 @@
   align-items: flex-end;
 
   .container:not(.split) & {
-    margin-left: calc(var(--key-height) / -1.333);
+    margin-left: calc(var(--key-height) * -0.75);
   }
 }
 

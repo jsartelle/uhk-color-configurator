@@ -35,16 +35,21 @@ export default function Key({
     changeColor(null)
   }
 
+  const id = `key-${layer}-${slot}-${index}`
+
   return (
     <div className={styles.key} style={additionalStyles} data-key-index={index}>
       <input
+        id={id}
         type="color"
         value={color ?? defaultColor}
         onChange={(e) => changeColor(e.target.value)}
         onContextMenu={resetColor}
       />
       {showKeyLabels ? (
-        <span className={styles.label}>{label}</span>
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
       ) : null}
     </div>
   )

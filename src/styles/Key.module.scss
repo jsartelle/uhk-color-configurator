@@ -8,15 +8,15 @@
   height: var(--key-height);
 
   input {
-    width: 100%;
-    height: 100%;
+    margin: 0;
   }
 }
 
 .label {
   position: absolute;
-  padding: 0 3px;
+  margin: 0;
+  padding: 0 0.375em;
   background-color: #ffffff7f;
-  color: black;
-  pointer-events: none;
+  color: black; // TODO use inverse of key color instead
+  font-size: calc(var(--key-height) / 3);
 }

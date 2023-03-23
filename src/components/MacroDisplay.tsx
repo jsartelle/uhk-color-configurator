@@ -111,7 +111,9 @@ set backlight.perKey.default_coloring 0
 
 ${uniqueColors
   .map((color, index) => {
-    const names = colorNamer(`rgb(${color.replaceAll(' ', ',')})`, { pick: ['pantone']})
+    const names = colorNamer(`rgb(${color.replaceAll(' ', ',')})`, {
+      pick: ['pantone'],
+    })
     return `set backlight.perKey.color ${index} ${color} # ${names.pantone[0].name}`
   })
   .join('\n')}
@@ -141,31 +143,43 @@ ${customColors
   .join('\n')}
 `
   return (
-    <section className={styles.container}>
-      <textarea
-        readOnly={!editMode}
-        className={styles.textarea}
-        value={editMode ? editMacro : macro}
-        onChange={(e) => (editMode ? setEditMacro(e.target.value) : null)}
-      />
-      {!editMode ? (
-        <button
-          className={styles.copy}
-          onClick={() => navigator.clipboard.writeText(macro)}
-        >
-          Copy
-        </button>
-      ) : null}
+    <section>
+      <h2>Macro</h2>
+
+      <div className={styles.macroContainer}>
+        <textarea
+          readOnly={!editMode}
+          className={styles.macro}
+          value={editMode ? editMacro : macro}
+          onChange={(e) => (editMode ? setEditMacro(e.target.value) : null)}
+        />
+        {!editMode ? (
+          <span
+            role="button"
+            className={styles.copyButton}
+            onClick={() => navigator.clipboard.writeText(macro)}
+          >
+            Copy
+          </span>
+        ) : null}
+      </div>
+
       <div className={styles.buttons}>
         {!editMode ? (
-          <button onClick={() => setEditMode(true)}>
-            Import Colors from Macro
-          </button>
+          <button onClick={() => setEditMode(true)}>Import Macro</button>
         ) : (
           <>
-            <span>Paste a macro into the text field to import colors.</span>
-            <button onClick={cancelEdit}>Cancel</button>
-            <button onClick={saveEdit}>Import</button>
+            <span className={styles.editDescription}>
+              Paste a macro into the text field to import it.
+              <br />
+              Make sure the right layers are enabled before importing.
+            </span>
+            <span role="button" onClick={cancelEdit}>
+              Cancel
+            </span>
+            <span role="button" onClick={saveEdit}>
+              Import
+            </span>
           </>
         )}
       </div>
