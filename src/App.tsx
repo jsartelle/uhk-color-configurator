@@ -38,6 +38,7 @@ function App() {
   const [layers, setLayers] = useState({ ...defaultLayers })
   const [activeLayer, setActiveLayer] = useState(0)
   const [editLayers, setEditLayers] = useState(false)
+  // TODO set primary UI color to defaultColor
   const [defaultColor, setDefaultColor] = useState('#ffffff')
   const [splitLayout, setSplitLayout] = useState(true)
   const [showKeyLabels, setShowKeyLabels] = useState(true)
