@@ -6,8 +6,8 @@ A tool to edit custom color schemes for the [Ultimate Hacking Keyboard](https://
 
 ## Built With
 
-[React](https://react.dev/)
-[TypeScript](https://www.typescriptlang.org/)
-[Sass](https://sass-lang.com/)
-[CSS Modules](https://github.com/css-modules/css-modules)
-[PicoCSS](https://picocss.com/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Sass](https://sass-lang.com/)
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [PicoCSS](https://picocss.com/)

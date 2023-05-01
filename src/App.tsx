@@ -59,102 +59,115 @@ function App() {
   }
 
   return (
-    <main className="container">
-      <hgroup>
-        <h1>UHK Color Configurator</h1>
-        <p>Right click a key to reset to the default color.</p>
-      </hgroup>
+    <>
+      <main className={['container', styles.container].join(' ')}>
+        <hgroup>
+          <h1>UHK Color Configurator</h1>
+          <p>Right click a key to reset to the default color.</p>
+        </hgroup>
 
-      <KeyboardView
-        activeLayer={activeLayer}
-        defaultColor={defaultColor}
-        splitLayout={splitLayout}
-        showKeyLabels={showKeyLabels}
-        customColors={customColors}
-        setKeyColor={handleKeyColorChange}
-      />
+        <KeyboardView
+          activeLayer={activeLayer}
+          defaultColor={defaultColor}
+          splitLayout={splitLayout}
+          showKeyLabels={showKeyLabels}
+          customColors={customColors}
+          setKeyColor={handleKeyColorChange}
+        />
 
-      <section>
-        <h2>Active Layer</h2>
-        <fieldset className={styles.layerList}>
-          {editLayers
-            ? Object.entries(layers).map(([name, value], index) => (
-                <label key={index} className={styles.layer}>
-                  <input
-                    type="checkbox"
-                    name="layer"
-                    disabled={index === 0}
-                    checked={value}
-                    onChange={() => setLayers({ ...layers, [name]: !value })}
-                  />
-                  <span>{name}</span>
-                </label>
-              ))
-            : Object.entries(layers)
-                .filter(([, value]) => value)
-                .map(([name], index) => (
+        <section>
+          <h2>Active Layer</h2>
+          <fieldset className={styles.layerList}>
+            {editLayers
+              ? Object.entries(layers).map(([name, value], index) => (
                   <label key={index} className={styles.layer}>
                     <input
-                      type="radio"
+                      type="checkbox"
                       name="layer"
-                      value={index}
-                      checked={index === activeLayer}
-                      onChange={(e) => setActiveLayer(parseInt(e.target.value))}
+                      disabled={index === 0}
+                      checked={value}
+                      onChange={() => setLayers({ ...layers, [name]: !value })}
                     />
                     <span>{name}</span>
                   </label>
-                ))}
-        </fieldset>
+                ))
+              : Object.entries(layers)
+                  .filter(([, value]) => value)
+                  .map(([name], index) => (
+                    <label key={index} className={styles.layer}>
+                      <input
+                        type="radio"
+                        name="layer"
+                        value={index}
+                        checked={index === activeLayer}
+                        onChange={(e) =>
+                          setActiveLayer(parseInt(e.target.value))
+                        }
+                      />
+                      <span>{name}</span>
+                    </label>
+                  ))}
+          </fieldset>
 
-        {/* FIXME when layers are changed update macro appropriately */}
-        <button onClick={() => setEditLayers(!editLayers)}>
-          {editLayers ? 'Save' : 'Edit Layers...'}
-        </button>
-      </section>
+          {/* FIXME when layers are changed update macro appropriately */}
+          <button onClick={() => setEditLayers(!editLayers)}>
+            {editLayers ? 'Save' : 'Edit Layers...'}
+          </button>
+        </section>
 
+        <section>
+          <h2>Settings</h2>
+          <fieldset>
+            <label>
+              <input
+                className={styles.defaultColor}
+                type="color"
+                value={defaultColor}
+                onChange={(e) => setDefaultColor(e.target.value)}
+              />
+              <span>Default Color</span>
+            </label>
 
-      <section>
-        <h2>Settings</h2>
-        <fieldset>
-          <label>
-            <input
-              className={styles.defaultColor}
-              type="color"
-              value={defaultColor}
-              onChange={(e) => setDefaultColor(e.target.value)}
-            />
-            <span>Default Color</span>
-          </label>
+            <label>
+              <input
+                type="checkbox"
+                role="switch"
+                checked={splitLayout}
+                onChange={(e) => setSplitLayout(!splitLayout)}
+              />
+              <span>Split Layout</span>
+            </label>
 
-          <label>
-            <input
-              type="checkbox"
-              role="switch"
-              checked={splitLayout}
-              onChange={(e) => setSplitLayout(!splitLayout)}
-            />
-            <span>Split Layout</span>
-          </label>
+            <label>
+              <input
+                type="checkbox"
+                role="switch"
+                checked={showKeyLabels}
+                onChange={(e) => setShowKeyLabels(!showKeyLabels)}
+              />
+              <span>Show Key Labels</span>
+            </label>
+          </fieldset>
+        </section>
 
-          <label>
-            <input
-              type="checkbox"
-              role="switch"
-              checked={showKeyLabels}
-              onChange={(e) => setShowKeyLabels(!showKeyLabels)}
-            />
-            <span>Show Key Labels</span>
-          </label>
-        </fieldset>
-      </section>
+        <MacroDisplay
+          defaultColor={defaultColor}
+          setDefaultColor={setDefaultColor}
+          customColors={customColors}
+          setCustomColors={setCustomColors}
+        />
+      </main>
 
-      <MacroDisplay
-        defaultColor={defaultColor}
-        setDefaultColor={setDefaultColor}
-        customColors={customColors}
-        setCustomColors={setCustomColors}
-      />
-    </main>
+      <footer>
+        <a
+          href="https://github.com/jsartelle/uhk-color-configurator"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View Source
+        </a>
+      </footer>
+    </>
   )
 }
 

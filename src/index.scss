@@ -25,6 +25,14 @@
   }
 }
 
+#root {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
 label:has(> input) {
   cursor: pointer;
 }
