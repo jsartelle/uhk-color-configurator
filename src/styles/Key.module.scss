@@ -4,11 +4,12 @@
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  width: calc(var(--key-height) * var(--width));
+  width: calc(var(--key-height) * var(--key-unit-width));
   height: var(--key-height);
 
   input {
     margin: 0;
+    height: inherit;
   }
 }
 

@@ -24,7 +24,7 @@ export default function Key({
   color,
   setKeyColor,
 }: Props) {
-  const additionalStyles = { '--width': width } as React.CSSProperties
+  const additionalStyles = { '--key-unit-width': width } as React.CSSProperties
 
   const changeColor = (newColor: string | null) => {
     setKeyColor({ layer, slot, index, color: newColor })

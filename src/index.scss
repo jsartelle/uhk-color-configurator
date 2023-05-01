@@ -6,29 +6,22 @@
 :root {
   --key-height: calc(var(--viewport-width) / 20);
   --spacing-small: 0.375em;
+  --viewport-width: 100vw;
 
-  @if map-get(pico.$breakpoints, 'sm') {
-    @media (min-width: map-get(pico.$breakpoints, 'sm')) {
-      --viewport-width: #{map-get(pico.$viewports, 'sm')};
-    }
+  @media (min-width: map-get(pico.$breakpoints, 'sm')) {
+    --viewport-width: #{map-get(pico.$viewports, 'sm')};
   }
 
-  @if map-get(pico.$breakpoints, 'md') {
-    @media (min-width: map-get(pico.$breakpoints, 'md')) {
-      --viewport-width: #{map-get(pico.$viewports, 'md')};
-    }
+  @media (min-width: map-get(pico.$breakpoints, 'md')) {
+    --viewport-width: #{map-get(pico.$viewports, 'md')};
   }
 
-  @if map-get(pico.$breakpoints, 'lg') {
-    @media (min-width: map-get(pico.$breakpoints, 'lg')) {
-      --viewport-width: #{map-get(pico.$viewports, 'lg')};
-    }
+  @media (min-width: map-get(pico.$breakpoints, 'lg')) {
+    --viewport-width: #{map-get(pico.$viewports, 'lg')};
   }
 
-  @if map-get(pico.$breakpoints, 'xl') {
-    @media (min-width: map-get(pico.$breakpoints, 'xl')) {
-      --viewport-width: #{map-get(pico.$viewports, 'xl')};
-    }
+  @media (min-width: map-get(pico.$breakpoints, 'xl')) {
+    --viewport-width: #{map-get(pico.$viewports, 'xl')};
   }
 }
 
