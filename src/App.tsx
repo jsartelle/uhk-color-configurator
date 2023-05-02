@@ -34,11 +34,22 @@ const defaultLayers = {
   Super: false,
 }
 
+const themeQuery = window.matchMedia('(prefers-color-scheme: dark)')
+const changeThemeColor = () => {
+  document
+    .querySelector('meta[name=theme-color]')
+    ?.setAttribute('content', themeQuery.matches ? '#11191f' : '#fff')
+}
+changeThemeColor()
+themeQuery.addEventListener('change', changeThemeColor)
+
+// TODO accessibility pass
+
 function App() {
   const [layers, setLayers] = useState({ ...defaultLayers })
   const [activeLayer, setActiveLayer] = useState(0)
   const [editLayers, setEditLayers] = useState(false)
-  // TODO set primary UI color to defaultColor
+  // FIXME override Pico theme colors
   const [defaultColor, setDefaultColor] = useState('#ffffff')
   const [splitLayout, setSplitLayout] = useState(true)
   const [showKeyLabels, setShowKeyLabels] = useState(true)
