@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import styles from './styles/App.module.scss'
 import KeyboardView from './components/KeyboardView'
 import MacroDisplay from './components/MacroDisplay'
+import styles from './styles/App.module.scss'
 
 export interface KeyColor {
   layer: number
@@ -49,7 +49,7 @@ function App() {
   const [layers, setLayers] = useState({ ...defaultLayers })
   const [activeLayer, setActiveLayer] = useState(0)
   const [editLayers, setEditLayers] = useState(false)
-  // FIXME override Pico theme colors
+  // TODO override Pico theme colors
   const [defaultColor, setDefaultColor] = useState('#ffffff')
   const [splitLayout, setSplitLayout] = useState(true)
   const [showKeyLabels, setShowKeyLabels] = useState(true)
@@ -126,6 +126,8 @@ function App() {
           </button>
         </section>
 
+        {/* TODO add setup instructions */}
+
         <section>
           <h2>Settings</h2>
           <fieldset>
@@ -167,6 +169,18 @@ function App() {
           customColors={customColors}
           setCustomColors={setCustomColors}
         />
+
+        <details>
+          <summary>View State (debug)</summary>
+          <label>
+            customColors
+            <textarea
+              readOnly={true}
+              className={styles.debugView}
+              value={JSON.stringify(customColors, null, '\t')}
+            />
+          </label>
+        </details>
       </main>
 
       <footer>

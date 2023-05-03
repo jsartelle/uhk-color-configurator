@@ -18,3 +18,9 @@
   width: var(--key-height) !important;
   height: var(--key-height) !important;
 }
+
+.debugView {
+  min-height: 5rem;
+  font-family: monospace;
+  resize: vertical;
+}
