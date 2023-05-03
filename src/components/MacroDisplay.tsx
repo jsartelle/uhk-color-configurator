@@ -140,7 +140,7 @@ ${customColors
         {!editMode ? (
           <span
             role="button"
-            className={styles.copyButton}
+            className={`${styles.copyButton} secondary`}
             onClick={() => navigator.clipboard.writeText(macro)}
           >
             Copy
@@ -158,7 +158,7 @@ ${customColors
               <br />
               Make sure the right layers are enabled before importing.
             </span>
-            <span role="button" onClick={cancelEdit}>
+            <span role="button" className="secondary" onClick={cancelEdit}>
               Cancel
             </span>
             <span role="button" onClick={saveEdit}>
