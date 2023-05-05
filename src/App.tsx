@@ -51,8 +51,8 @@ function App() {
   const [layers, setLayers, resetDefaultLayers] = useLocalStorage('layers', {
     ...defaultLayers,
   })
-  const [activeLayer, setActiveLayer, resetActiveLayer] = useLocalStorage(
-    'activeLayer',
+  const [currentLayer, setCurrentLayer, resetCurrentLayer] = useLocalStorage(
+    'currentLayer',
     0
   )
   const [editLayers, setEditLayers] = useState(false)
@@ -91,7 +91,7 @@ function App() {
   const reset = () => {
     if (window.confirm('Reset your current colors and settings?')) {
       resetDefaultLayers()
-      resetActiveLayer()
+      resetCurrentLayer()
       resetDefaultColor()
       resetSplitLayout()
       resetShowKeyLabels()
@@ -111,7 +111,7 @@ function App() {
           </hgroup>
 
           <KeyboardView
-            activeLayer={activeLayer}
+            activeLayer={currentLayer}
             defaultColor={defaultColor}
             splitLayout={splitLayout}
             showKeyLabels={showKeyLabels}
@@ -121,11 +121,11 @@ function App() {
         </section>
 
         <section>
-          <h2>Active Layer</h2>
+          <h2>Current Layer</h2>
           <fieldset className={styles.layerList}>
             {editLayers
               ? Object.entries(layers).map(([name, value], index) => (
-                  // FIXME handle active layer being hidden
+                  // FIXME handle current layer being hidden
                   <label key={index} className={styles.layer}>
                     <input
                       type="checkbox"
@@ -145,9 +145,9 @@ function App() {
                         type="radio"
                         name="layer"
                         value={index}
-                        checked={index === activeLayer}
+                        checked={index === currentLayer}
                         onChange={(e) =>
-                          setActiveLayer(parseInt(e.target.value))
+                          setCurrentLayer(parseInt(e.target.value))
                         }
                       />
                       <span>{name}</span>
@@ -157,53 +157,76 @@ function App() {
 
           {/* FIXME when layers are changed update macro appropriately */}
           <button onClick={() => setEditLayers(!editLayers)}>
-            {editLayers ? 'Save' : 'Edit Layers...'}
+            {editLayers ? 'Save' : 'Set Active Layers...'}
           </button>
         </section>
 
-        {/* TODO add setup instructions */}
+        <div className="grid">
+          <section>
+            <h2>Settings</h2>
+            <fieldset>
+              <label>
+                <input
+                  className={styles.defaultColor}
+                  type="color"
+                  value={defaultColor}
+                  onChange={(e) => setDefaultColor(e.target.value)}
+                  onContextMenu={resetDefaultColor}
+                  draggable="false"
+                  {...resetDefaultColorBind()}
+                />
+                <span>Default Color</span>
+              </label>
 
-        <section>
-          <h2>Settings</h2>
-          <fieldset>
-            <label>
-              <input
-                className={styles.defaultColor}
-                type="color"
-                value={defaultColor}
-                onChange={(e) => setDefaultColor(e.target.value)}
-                onContextMenu={resetDefaultColor}
-                draggable="false"
-                {...resetDefaultColorBind()}
-              />
-              <span>Default Color</span>
-            </label>
+              <label>
+                <input
+                  type="checkbox"
+                  role="switch"
+                  checked={splitLayout}
+                  onChange={(e) => setSplitLayout(!splitLayout)}
+                />
+                <span>Split Layout</span>
+              </label>
 
-            <label>
-              <input
-                type="checkbox"
-                role="switch"
-                checked={splitLayout}
-                onChange={(e) => setSplitLayout(!splitLayout)}
-              />
-              <span>Split Layout</span>
-            </label>
+              <label>
+                <input
+                  type="checkbox"
+                  role="switch"
+                  checked={showKeyLabels}
+                  onChange={(e) => setShowKeyLabels(!showKeyLabels)}
+                />
+                <span>Show Key Labels</span>
+              </label>
 
-            <label>
-              <input
-                type="checkbox"
-                role="switch"
-                checked={showKeyLabels}
-                onChange={(e) => setShowKeyLabels(!showKeyLabels)}
-              />
-              <span>Show Key Labels</span>
-            </label>
+              <span
+                role="button"
+                className={styles.resetButton}
+                onClick={reset}
+              >
+                Reset Everything
+              </span>
+            </fieldset>
+          </section>
 
-            <span role="button" className={styles.resetButton} onClick={reset}>
-              Reset Everything
-            </span>
-          </fieldset>
-        </section>
+          <section>
+            <h2>Instructions</h2>
+
+            <ul>
+              <li>
+                Requires{' '}
+                <a href="https://github.com/Zot1881/firmware">
+                  custom firmware by Zot1881
+                </a>
+              </li>
+              <li>
+                <strong>Set your active layers before you begin!</strong>
+                <br />
+                The layer indices in the macro depend on which layers are
+                active.
+              </li>
+            </ul>
+          </section>
+        </div>
 
         <MacroDisplay
           defaultColor={defaultColor}
