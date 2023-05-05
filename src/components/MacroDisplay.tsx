@@ -154,9 +154,11 @@ ${customColors
         ) : (
           <>
             <span className={styles.editDescription}>
-              Paste a macro into the text field to import it.
+              <span>Paste a macro into the text field to import it.</span>
               <br />
-              Make sure the right layers are enabled before importing.
+              <span className={styles.editWarning}>
+                Make sure you have enabled the right layers before importing!
+              </span>
             </span>
             <span role="button" className="secondary" onClick={cancelEdit}>
               Cancel
