@@ -16,8 +16,10 @@
 .label {
   position: absolute;
   margin: 0;
-  padding: 0 0.375em;
-  background-color: #ffffff7f;
-  color: black; // TODO use inverse of key color instead
+  color: black;
   font-size: calc(var(--key-height) / 3);
+
+  &[data-contrast-color="white"] {
+    color: white;
+  }
 }

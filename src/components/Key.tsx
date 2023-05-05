@@ -1,4 +1,5 @@
 import styles from '../styles/Key.module.scss'
+import { getContrast } from '../utils/color'
 import type { KeyColorChangeHandler } from '../App'
 
 interface Props {
@@ -30,6 +31,7 @@ export default function Key({
     setKeyColor({ layer, slot, index, color: newColor })
   }
 
+  // TODO allow long press to reset color
   const resetColor = (e: React.MouseEvent) => {
     e.preventDefault()
     changeColor(null)
@@ -37,17 +39,26 @@ export default function Key({
 
   const id = `key-${layer}-${slot}-${index}`
 
+  const keyColor = color ?? defaultColor
+  // TODO move this calculation to the time of storing the color
+  const contrastColor = getContrast(keyColor)
+
   return (
     <div className={styles.key} style={additionalStyles} data-key-index={index}>
+      {/* TODO move to React Color and pre-populate palette with currently used colors https://casesandberg.github.io/react-color/#api-individual */}
       <input
         id={id}
         type="color"
-        value={color ?? defaultColor}
+        value={keyColor}
         onChange={(e) => changeColor(e.target.value)}
         onContextMenu={resetColor}
       />
       {showKeyLabels ? (
-        <label htmlFor={id} className={styles.label}>
+        <label
+          htmlFor={id}
+          className={styles.label}
+          data-contrast-color={contrastColor}
+        >
           {label}
         </label>
       ) : null}
