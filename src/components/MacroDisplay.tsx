@@ -150,7 +150,12 @@ ${customColors
 
       <div className={styles.buttons}>
         {!editMode ? (
-          <button onClick={() => setEditMode(true)}>Import Macro</button>
+          <button
+            className={styles.importButton}
+            onClick={() => setEditMode(true)}
+          >
+            Import Macro
+          </button>
         ) : (
           <>
             <span className={styles.editDescription}>
