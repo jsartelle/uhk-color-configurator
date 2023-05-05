@@ -6,8 +6,8 @@ import type { KeyColor, KeyColorChangeHandler } from '../App'
 interface Props {
   activeLayer: number
   defaultColor: string
-  splitLayout: boolean,
-  showKeyLabels: boolean,
+  splitLayout: boolean
+  showKeyLabels: boolean
   customColors: KeyColor[]
   setKeyColor: KeyColorChangeHandler
 }
@@ -24,7 +24,7 @@ export default function KeyboardView({
   if (splitLayout) className += ` ${styles.split}`
 
   return (
-    <section className={className}>
+    <div className={className}>
       {Object.entries(keyMap).map(([deviceName, device], index) => {
         return (
           <div className={styles[deviceName]} key={index}>
@@ -56,6 +56,6 @@ export default function KeyboardView({
           </div>
         )
       })}
-    </section>
+    </div>
   )
 }

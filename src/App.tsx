@@ -102,19 +102,23 @@ function App() {
   return (
     <>
       <main className={['container', styles.container].join(' ')}>
-        <hgroup>
-          <h1>UHK Color Configurator</h1>
-          <p>Right click or long press a key to reset to the default color.</p>
-        </hgroup>
+        <section>
+          <hgroup>
+            <h1>UHK Color Configurator</h1>
+            <p>
+              Right click or long press a key to reset to the default color.
+            </p>
+          </hgroup>
 
-        <KeyboardView
-          activeLayer={activeLayer}
-          defaultColor={defaultColor}
-          splitLayout={splitLayout}
-          showKeyLabels={showKeyLabels}
-          customColors={customColors}
-          setKeyColor={handleKeyColorChange}
-        />
+          <KeyboardView
+            activeLayer={activeLayer}
+            defaultColor={defaultColor}
+            splitLayout={splitLayout}
+            showKeyLabels={showKeyLabels}
+            customColors={customColors}
+            setKeyColor={handleKeyColorChange}
+          />
+        </section>
 
         <section>
           <h2>Active Layer</h2>
