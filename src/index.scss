@@ -4,6 +4,8 @@
 );
 
 :root {
+  --danger: #{pico.$red-700};
+  --danger-hover: #{pico.$red-900};
   --key-height: calc(var(--viewport-width) / 20);
   --spacing-small: 0.375em;
   --viewport-width: 100vw;
@@ -23,6 +25,21 @@
   @media (min-width: map-get(pico.$breakpoints, 'xl')) {
     --viewport-width: #{map-get(pico.$viewports, 'xl')};
   }
+}
+
+@mixin danger {
+  --danger: #{pico.$red-900};
+  --danger-hover: #{pico.$red-700};
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    @include danger;
+  }
+}
+
+[data-theme='dark'] {
+  @include danger;
 }
 
 #root {

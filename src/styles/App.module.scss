@@ -19,6 +19,12 @@
   height: var(--key-height) !important;
 }
 
+.resetButton {
+  --primary: var(--danger);
+  --primary-hover: var(--danger-hover);
+  margin-top: var(--spacing);
+}
+
 .debugView {
   min-height: 5rem;
   font-family: monospace;

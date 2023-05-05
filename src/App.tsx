@@ -2,6 +2,7 @@ import { useState } from 'react'
 import KeyboardView from './components/KeyboardView'
 import MacroDisplay from './components/MacroDisplay'
 import styles from './styles/App.module.scss'
+import useLocalStorage from './utils/useLocalStorage'
 
 export interface KeyColor {
   layer: number
@@ -46,15 +47,30 @@ themeQuery.addEventListener('change', changeThemeColor)
 // TODO accessibility pass
 
 function App() {
-  const [layers, setLayers] = useState({ ...defaultLayers })
-  const [activeLayer, setActiveLayer] = useState(0)
+  const [layers, setLayers, resetDefaultLayers] = useLocalStorage('layers', {
+    ...defaultLayers,
+  })
+  const [activeLayer, setActiveLayer, resetActiveLayer] = useLocalStorage(
+    'activeLayer',
+    0
+  )
   const [editLayers, setEditLayers] = useState(false)
   // TODO override Pico theme colors
-  const [defaultColor, setDefaultColor] = useState('#ffffff')
-  const [splitLayout, setSplitLayout] = useState(true)
-  const [showKeyLabels, setShowKeyLabels] = useState(true)
-  // TODO save/load from localStorage, add reset button
-  const [customColors, setCustomColors] = useState<KeyColor[]>([])
+  const [defaultColor, setDefaultColor, resetDefaultColor] = useLocalStorage(
+    'defaultColor',
+    '#ffffff'
+  )
+  const [splitLayout, setSplitLayout, resetSplitLayout] = useLocalStorage(
+    'splitLayout',
+    true
+  )
+  const [showKeyLabels, setShowKeyLabels, resetShowKeyLabels] = useLocalStorage(
+    'showKeyLabels',
+    true
+  )
+  const [customColors, setCustomColors, resetCustomColors] = useLocalStorage<
+    KeyColor[]
+  >('customColors', [])
 
   const handleKeyColorChange: KeyColorChangeHandler = (keyColor) => {
     const newCustomColors = [...customColors]
@@ -67,6 +83,17 @@ function App() {
     if (index > -1) newCustomColors.splice(index, 1)
     if (keyColor.color !== null) newCustomColors.push(keyColor as KeyColor)
     setCustomColors(newCustomColors)
+  }
+
+  const reset = () => {
+    if (window.confirm('Reset your current colors and settings?')) {
+      resetDefaultLayers()
+      resetActiveLayer()
+      resetDefaultColor()
+      resetSplitLayout()
+      resetShowKeyLabels()
+      resetCustomColors()
+    }
   }
 
   return (
@@ -91,6 +118,7 @@ function App() {
           <fieldset className={styles.layerList}>
             {editLayers
               ? Object.entries(layers).map(([name, value], index) => (
+                  // FIXME handle active layer being hidden
                   <label key={index} className={styles.layer}>
                     <input
                       type="checkbox"
@@ -160,6 +188,10 @@ function App() {
               />
               <span>Show Key Labels</span>
             </label>
+
+            <span role="button" className={styles.resetButton} onClick={reset}>
+              Reset Everything
+            </span>
           </fieldset>
         </section>
 
