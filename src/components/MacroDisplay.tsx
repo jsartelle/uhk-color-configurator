@@ -132,30 +132,25 @@ ${customColors
 
       <div className={styles.macroContainer}>
         <textarea
+          aria-label="Macro"
           readOnly={!editMode}
           className={styles.macro}
           value={editMode ? editMacro : macro}
           onChange={(e) => (editMode ? setEditMacro(e.target.value) : null)}
         />
         {!editMode ? (
-          <span
-            role="button"
-            className={`${styles.copyButton} secondary`}
+          <button
+            className={`${styles.copyButton} secondary auto-width`}
             onClick={() => navigator.clipboard.writeText(macro)}
           >
             Copy
-          </span>
+          </button>
         ) : null}
       </div>
 
       <div className={styles.buttons}>
         {!editMode ? (
-          <button
-            className={styles.importButton}
-            onClick={() => setEditMode(true)}
-          >
-            Import Macro
-          </button>
+          <button onClick={() => setEditMode(true)}>Import Macro</button>
         ) : (
           <>
             <span className={styles.editDescription}>
@@ -165,12 +160,12 @@ ${customColors
                 Make sure you have enabled the right layers before importing!
               </span>
             </span>
-            <span role="button" className="secondary" onClick={cancelEdit}>
+            <button className="secondary auto-width" onClick={cancelEdit}>
               Cancel
-            </span>
-            <span role="button" onClick={saveEdit}>
+            </button>
+            <button className="auto-width" onClick={saveEdit}>
               Import
-            </span>
+            </button>
           </>
         )}
       </div>

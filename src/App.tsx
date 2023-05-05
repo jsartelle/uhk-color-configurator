@@ -45,8 +45,6 @@ const changeThemeColor = () => {
 changeThemeColor()
 themeQuery.addEventListener('change', changeThemeColor)
 
-// TODO accessibility pass
-
 function App() {
   const [layers, setLayers, resetDefaultLayers] = useLocalStorage('layers', {
     ...defaultLayers,
@@ -123,6 +121,7 @@ function App() {
         <section>
           <h2>Current Layer</h2>
           <fieldset className={styles.layerList}>
+            <legend hidden>Current Layer</legend>
             {editLayers
               ? Object.entries(layers).map(([name, value], index) => (
                   <label key={index} className={styles.layer}>
@@ -173,6 +172,7 @@ function App() {
           <section>
             <h2>Settings</h2>
             <fieldset>
+              <legend hidden>Settings</legend>
               <label>
                 <input
                   className={styles.defaultColor}
@@ -206,13 +206,9 @@ function App() {
                 <span>Show Key Labels</span>
               </label>
 
-              <span
-                role="button"
-                className={styles.resetButton}
-                onClick={reset}
-              >
+              <button className={`${styles.resetButton} auto-width`} onClick={reset}>
                 Reset Everything
-              </span>
+              </button>
             </fieldset>
           </section>
 
@@ -245,14 +241,13 @@ function App() {
 
         <details>
           <summary>View State (debug)</summary>
-          <label>
-            customColors
-            <textarea
-              readOnly={true}
-              className={styles.debugView}
-              value={JSON.stringify(customColors, null, '\t')}
-            />
-          </label>
+          <label htmlFor="debugCustomColors">customColors</label>
+          <textarea
+            id="debugCustomColors"
+            readOnly={true}
+            className={styles.debugView}
+            value={JSON.stringify(customColors, null, '\t')}
+          />
         </details>
       </main>
 

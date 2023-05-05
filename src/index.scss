@@ -27,19 +27,19 @@
   }
 }
 
-@mixin danger {
+@mixin danger-dark {
   --danger: #{pico.$red-900};
   --danger-hover: #{pico.$red-700};
 }
 
 @media only screen and (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    @include danger;
+    @include danger-dark;
   }
 }
 
 [data-theme='dark'] {
-  @include danger;
+  @include danger-dark;
 }
 
 #root {
@@ -50,14 +50,14 @@
   min-height: 100vh;
 }
 
-label:has(> input) {
-  cursor: pointer;
+h2 {
+  margin-bottom: calc(var(--typography-spacing-vertical) / 2);
 }
 
 input[type='color'] {
   padding: 0;
 }
 
-h2 {
-  margin-bottom: calc(var(--typography-spacing-vertical) / 2);
+button.auto-width {
+  width: auto;
 }

@@ -39,7 +39,7 @@ export default function Key({
 
   const longPressBind = useLongPress(() => resetColor())
 
-  const id = `key-${layer}-${slot}-${index}`
+  const id = `key-${slot}-${index}`
 
   const keyColor = color ?? defaultColor
   // TODO move this calculation to the time of storing the color
@@ -62,15 +62,14 @@ export default function Key({
         draggable="false"
         onChange={(e) => changeColor(e.target.value)}
       />
-      {showKeyLabels ? (
-        <label
-          htmlFor={id}
-          className={styles.label}
-          data-contrast-color={contrastColor}
-        >
-          {label}
-        </label>
-      ) : null}
+      <label
+        htmlFor={id}
+        className={styles.label}
+        hidden={!showKeyLabels}
+        data-contrast-color={contrastColor}
+      >
+        {label}
+      </label>
     </div>
   )
 }
