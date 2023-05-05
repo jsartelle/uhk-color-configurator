@@ -125,14 +125,23 @@ function App() {
           <fieldset className={styles.layerList}>
             {editLayers
               ? Object.entries(layers).map(([name, value], index) => (
-                  // FIXME handle current layer being hidden
                   <label key={index} className={styles.layer}>
                     <input
                       type="checkbox"
                       name="layer"
                       disabled={index === 0}
                       checked={value}
-                      onChange={() => setLayers({ ...layers, [name]: !value })}
+                      onChange={() => {
+                        const newLayers = { ...layers, [name]: !value }
+                        setLayers(newLayers)
+                        // if the highest layer is disabled, select the next highest
+                        if (
+                          currentLayer >=
+                          Object.values(newLayers).filter(Boolean).length
+                        ) {
+                          setCurrentLayer(currentLayer - 1)
+                        }
+                      }}
                     />
                     <span>{name}</span>
                   </label>
@@ -155,7 +164,6 @@ function App() {
                   ))}
           </fieldset>
 
-          {/* FIXME when layers are changed update macro appropriately */}
           <button onClick={() => setEditLayers(!editLayers)}>
             {editLayers ? 'Save' : 'Set Active Layers...'}
           </button>
