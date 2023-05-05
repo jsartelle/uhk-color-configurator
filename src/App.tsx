@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLongPress } from 'use-long-press'
 import KeyboardView from './components/KeyboardView'
 import MacroDisplay from './components/MacroDisplay'
 import styles from './styles/App.module.scss'
@@ -85,6 +86,8 @@ function App() {
     setCustomColors(newCustomColors)
   }
 
+  const resetDefaultColorBind = useLongPress(() => resetDefaultColor())
+
   const reset = () => {
     if (window.confirm('Reset your current colors and settings?')) {
       resetDefaultLayers()
@@ -101,7 +104,7 @@ function App() {
       <main className={['container', styles.container].join(' ')}>
         <hgroup>
           <h1>UHK Color Configurator</h1>
-          <p>Right click a key to reset to the default color.</p>
+          <p>Right click or long press a key to reset to the default color.</p>
         </hgroup>
 
         <KeyboardView
@@ -165,6 +168,9 @@ function App() {
                 type="color"
                 value={defaultColor}
                 onChange={(e) => setDefaultColor(e.target.value)}
+                onContextMenu={resetDefaultColor}
+                draggable="false"
+                {...resetDefaultColorBind()}
               />
               <span>Default Color</span>
             </label>

@@ -1,3 +1,4 @@
+import { useLongPress } from 'use-long-press'
 import styles from '../styles/Key.module.scss'
 import { getContrast } from '../utils/color'
 import type { KeyColorChangeHandler } from '../App'
@@ -31,11 +32,12 @@ export default function Key({
     setKeyColor({ layer, slot, index, color: newColor })
   }
 
-  // TODO allow long press to reset color
-  const resetColor = (e: React.MouseEvent) => {
-    e.preventDefault()
+  const resetColor = (e?: React.MouseEvent) => {
+    e?.preventDefault()
     changeColor(null)
   }
+
+  const longPressBind = useLongPress(() => resetColor())
 
   const id = `key-${layer}-${slot}-${index}`
 
@@ -43,15 +45,22 @@ export default function Key({
   // TODO move this calculation to the time of storing the color
   const contrastColor = getContrast(keyColor)
 
+  // TODO allow dragging colors between keys
   return (
-    <div className={styles.key} style={additionalStyles} data-key-index={index}>
+    <div
+      className={styles.key}
+      style={additionalStyles}
+      data-key-index={index}
+      onContextMenu={resetColor}
+      {...longPressBind()}
+    >
       {/* TODO move to React Color and pre-populate palette with currently used colors https://casesandberg.github.io/react-color/#api-individual */}
       <input
         id={id}
         type="color"
         value={keyColor}
+        draggable="false"
         onChange={(e) => changeColor(e.target.value)}
-        onContextMenu={resetColor}
       />
       {showKeyLabels ? (
         <label
