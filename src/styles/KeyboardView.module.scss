@@ -20,7 +20,7 @@
 .cluster {
   composes: device;
   align-items: center;
-  margin-right: calc(var(--key-height) * 4);
+  margin-right: calc(var(--key-height) * 3.25);
   margin-left: calc(var(--key-height) * -0.5);
   transition: opacity var(--transition-timing);
 
@@ -43,7 +43,7 @@
   transition: margin-left var(--transition-timing);
 
   .container:not(.split) & {
-    margin-left: calc(var(--key-height) * -6.25);
+    margin-left: calc(var(--key-height) * -5.5);
   }
 }
 
